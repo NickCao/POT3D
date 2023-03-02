@@ -6,8 +6,9 @@ mpi = dependency('mpi', language: 'fortran')
 compiler = meson.get_compiler('fortran')
 
 flags = compiler.get_supported_arguments(
+    '-Ofast',
     '-march=native',
-    '-ffast-math',
+    '-mtune=native',
     '-flto=auto',
 )
 

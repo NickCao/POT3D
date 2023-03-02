@@ -14,13 +14,18 @@ set -euo pipefail
 
 source "$PROJECT/spack/share/spack/setup-env.sh"
 
-module use "$PROJECT/nickcao/nvhpc/modulefiles"
-module load python-3.10.8-gcc-8.3.1-ythg3kx
-module load meson-1.0.0-gcc-8.3.1-u3sn4aw
-module load ninja-1.11.1-gcc-8.3.1-6g2xce3
-module load nvhpc/23.1
-# spack install hdf5%nvhpc+fortran+hl~mpi
-module load hdf5-1.14.0-nvhpc-23.1-3wmji6d
+spack load python meson
+
+toolchain = "gnu"
+if [ "$toolchain" == "nvhpc" ]; then
+  module use "$PROJECT/nickcao/nvhpc/modulefiles"
+  module load nvhpc/23.1
+  # spack install hdf5%nvhpc+fortran+hl~mpi
+  module load hdf5-1.14.0-nvhpc-23.1-3wmji6d
+else
+  module load openmpi/4.0.5-gcc10.2.0
+  module load hdf5/1.10.7-gcc10.2.0
+fi
 
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
 SOURCEDIR="$PROJECT/nickcao/POT3D"

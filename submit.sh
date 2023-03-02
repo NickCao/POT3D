@@ -30,6 +30,8 @@ fi
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
 SOURCEDIR="$PROJECT/nickcao/POT3D"
 
+git -C "$SOURCEDIR" rev-parse HEAD
+
 meson setup --prefix "$WORKDIR/prefix" --buildtype release "$WORKDIR/builddir" "$SOURCEDIR"
 meson install -C "$WORKDIR/builddir"
 

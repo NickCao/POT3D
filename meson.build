@@ -14,6 +14,11 @@ flags = compiler.get_supported_arguments(
     '-parallel',
 )
 
+link_flags = compiler.get_supported_link_arguments(
+    # ifort only
+    '-parallel',
+)
+
 pot3d = executable(
     'pot3d',
     'src/number_types.f',
@@ -25,6 +30,7 @@ pot3d = executable(
     dependencies: [hdf5, mpi],
     link_language: 'fortran',
     fortran_args: flags,
+    link_args: link_flags,
     install: true,
 )
 

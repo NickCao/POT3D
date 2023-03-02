@@ -42,7 +42,10 @@ SOURCEDIR="$PROJECT/nickcao/POT3D"
 
 git -C "$SOURCEDIR" rev-parse HEAD
 
-meson setup --prefix "$WORKDIR/prefix" --buildtype release "$WORKDIR/builddir" "$SOURCEDIR"
+meson setup --prefix "$WORKDIR/prefix" --buildtype release \
+  -Db_lto=true -Db_ndebug=if-release \
+  "$WORKDIR/builddir" "$SOURCEDIR"
+
 meson install -C "$WORKDIR/builddir"
 
 "$SOURCEDIR/scripts/validate" \

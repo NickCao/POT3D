@@ -9,7 +9,6 @@ flags = compiler.get_supported_arguments(
     '-Ofast',
     '-march=native',
     '-mtune=native',
-    '-flto=auto',
 )
 
 pot3d = executable(

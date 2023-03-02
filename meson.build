@@ -5,19 +5,12 @@ mpi = dependency('mpi', language: 'fortran')
 
 compiler = meson.get_compiler('fortran')
 
-flags_candidate = [
+flags = compiler.get_supported_arguments(
     '-fast',
     '-march=native',
     '-ffast-math',
     '-flto=auto',
-]
-
-flags = []
-foreach flag : flags_candidate
-    if compiler.has_argument(flag)
-        flags += flag
-    endif
-endforeach
+)
 
 pot3d = executable(
     'pot3d',

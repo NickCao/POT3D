@@ -27,11 +27,13 @@ case "$TOOLCHAIN" in
     module load openmpi/4.0.5-gcc10.2.0
     module load hdf5/1.10.7-gcc10.2.0
     export FFLAGS="-ftree-parallelize-loops=$OMP_NUM_THREADS"
+    MPIARG=("--mca" "btl" '^openib')
     ;;
   intel)
     module load intel/20.4
     module load openmpi/4.0.2-intel20.4
     module load hdf5/1.12.0-intel20.4
+    MPIARG=()
     ;;
   *)
     exit 1
@@ -53,7 +55,7 @@ meson compile -C "$WORKDIR/builddir"
   --pot3d     "$WORKDIR/builddir/pot3d" \
   --workdir   "$WORKDIR/generate" \
   --testsuite "$SOURCEDIR/testsuite/isc2023" \
-  --mca btl '^openib'
+  "${MPIARG[@]}"
 
 meson configure -Db_pgo=use \
   "$WORKDIR/builddir"
@@ -64,4 +66,4 @@ meson compile -C "$WORKDIR/builddir"
   --pot3d     "$WORKDIR/builddir/pot3d" \
   --workdir   "$WORKDIR/use" \
   --testsuite "$SOURCEDIR/testsuite/isc2023" \
-  --mca btl '^openib'
+  "${MPIARG[@]}"

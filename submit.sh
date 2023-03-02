@@ -15,11 +15,12 @@ set -euo pipefail
 source "$PROJECT/spack/share/spack/setup-env.sh"
 
 module use "$PROJECT/nickcao/nvhpc/modulefiles"
+module load python-3.10.8-gcc-8.3.1-ythg3kx
 module load meson-1.0.0-gcc-8.3.1-u3sn4aw
-module load nvhpc-hpcx/23.1
+module load ninja-1.11.1-gcc-8.3.1-6g2xce3
+module load nvhpc/23.1
 # spack install hdf5%nvhpc+fortran+hl~mpi
 module load hdf5-1.14.0-nvhpc-23.1-3wmji6d
-module load python/3.8.6
 
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
 SOURCEDIR="$PROJECT/nickcao/POT3D"

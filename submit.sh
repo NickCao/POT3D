@@ -4,6 +4,7 @@
 #SBATCH --nodes=4
 #SBATCH --ntasks-per-node=16
 #SBATCH --cpus-per-task=8
+#SBATCH --time=02:00:00
 
 # Run POT3D with isc2023 input on both PSC bridges-2 and FAU Fritz CPU clusters using 4 nodes.
 # Experiment with number of ranks per socket/numa domains to get the best results.

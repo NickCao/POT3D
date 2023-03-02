@@ -24,7 +24,7 @@ subprocess.run(
         "lo",
         "--oversubscribe",
         "-np",
-        "12",
+        "2",
         args.pot3d,
     ],
     cwd=args.workdir,

@@ -23,11 +23,16 @@ validate = find_program(
 
 testsuites = [
     'validation',
-    'small',
-    'medium',
-    'large',
-    'isc2023',
 ]
+
+if get_option('large_tests')
+    testsuits += [
+        'small',
+        'medium',
+        'large',
+        'isc2023',
+    ]
+endif
 
 foreach testsuite : testsuites
     test(

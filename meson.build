@@ -16,26 +16,23 @@ pot3d = executable(
 )
 
 mpirun = find_program('mpirun')
-fs = import('fs')
+validate = find_program(
+    'validate',
+    ['scripts/validate'],
+)
 
 test(
-    'pot3d',
-    mpirun,
+    'validation',
+    validate,
     args: [
-        '--mca',
-        'btl',
-        'tcp,self',
-        '--mca',
-        'btl_tcp_if_include',
-        'lo',
-        '-np',
-        '2',
+        '--mpirun',
+        mpirun.full_path(),
+        '--pot3d',
         pot3d.full_path(),
+        '--workdir',
+        join_paths(meson.current_build_dir(), 'validation'),
+        '--testsuite',
+        join_paths(meson.current_source_dir(), 'testsuite/validation'),
     ],
-    depends: [
-        fs.copyfile('testsuite/validation/input/pot3d.dat'),
-        fs.copyfile('testsuite/validation/input/br_input_tiny.h5'),
-    ],
-    workdir: meson.current_build_dir(),
     timeout: 600,
 )

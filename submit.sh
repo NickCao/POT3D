@@ -10,6 +10,8 @@
 # ### The CG solver has converged.
 # Iteration:    25112   Residual:   9.972489313728662E-13
 
+set -euo pipefail
+
 source "$PROJECT/spack/share/spack/setup-env.sh"
 
 spack load meson

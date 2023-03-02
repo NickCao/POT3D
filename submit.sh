@@ -17,6 +17,6 @@ module load python/3.8.6
 "$PROJECT/nickcao/POT3D/scripts/validate" \
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$PROJECT/nickcao/POT3D/builddir/pot3d" \
-  --workdir   "$PROJECT/nickcao/workdir" \
+  --workdir   "$PROJECT/nickcao/workdir/$SLURM_JOB_ID" \
   --testsuite "$PROJECT/nickcao/POT3D/testsuite/validation" \
   --mca btl '^openib'

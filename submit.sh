@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=pot3d
 #SBATCH --partition=RM
-#SBATCH --nodes=2
+#SBATCH --nodes=4
 #SBATCH --ntasks-per-node=128
 
 # Run POT3D with isc2023 input on both PSC bridges-2 and FAU Fritz CPU clusters using 4 nodes.
@@ -30,5 +30,5 @@ meson install -C "$WORKDIR/builddir"
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$WORKDIR/prefix/bin/pot3d" \
   --workdir   "$WORKDIR/work" \
-  --testsuite "$SOURCEDIR/testsuite/validation" \
+  --testsuite "$SOURCEDIR/testsuite/isc2023" \
   --mca btl '^openib'

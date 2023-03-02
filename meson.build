@@ -11,6 +11,7 @@ flags = compiler.get_supported_arguments(
     '-mtune=native',
     # ifort only
     '-fast',
+    '-parallel',
 )
 
 pot3d = executable(

@@ -19,6 +19,7 @@ pot3d = executable(
         '-ffast-math',
         '-flto=auto',
     ],
+    install: true,
 )
 
 mpirun = find_program('mpirun')

@@ -6,15 +6,10 @@ mpi = dependency('mpi', language: 'fortran')
 compiler = meson.get_compiler('fortran')
 
 flags = compiler.get_supported_arguments(
-    '-fast',
     '-march=native',
     '-ffast-math',
     '-flto=auto',
 )
-
-if get_option('multithread') != 0
-  flags += '-ftree-parallelize-loops=@0@'.format(get_option('multithread'))
-endif
 
 pot3d = executable(
     'pot3d',

@@ -12,4 +12,5 @@ executable(
     'src/zm_sds.f',
     'src/pot3d.F',
     dependencies: [hdf5, mpi],
+    link_language: 'fortran',
 )

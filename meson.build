@@ -12,6 +12,10 @@ flags = compiler.get_supported_arguments(
     '-flto=auto',
 )
 
+if get_option('multithread') != 0
+  flags += '-ftree-parallelize-loops=@0@'.format(get_option('multithread'))
+endif
+
 pot3d = executable(
     'pot3d',
     'src/number_types.f',

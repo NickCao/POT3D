@@ -1,1 +1,3 @@
-option('large_tests', type : 'boolean', value : false)
+option('large_tests', type: 'boolean', value: false)
+option('multithread', type : 'integer', value : 0)
+option('gpu', type: 'boolean', value: false)

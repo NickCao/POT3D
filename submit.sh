@@ -12,4 +12,5 @@ module load python/3.8.6
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$PROJECT/nickcao/POT3D/builddir/pot3d" \
   --workdir   "$PROJECT/nickcao/workdir" \
-  --testsuite "$PROJECT/nickcao/POT3D/testsuite/validation"
+  --testsuite "$PROJECT/nickcao/POT3D/testsuite/validation" \
+  --mca btl '^openib'

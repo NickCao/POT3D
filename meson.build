@@ -14,7 +14,6 @@ pot3d = executable(
     dependencies: [hdf5, mpi],
     link_language: 'fortran',
     fortran_args: [
-        '-O3',
         '-march=native',
         '-ffast-math',
         '-flto=auto',

@@ -1,6 +1,6 @@
 project('POT3D', ['fortran', 'c'])
 
-hdf5 = dependency('hdf5', language: 'fortran', method: 'config-tool')
+hdf5 = dependency('hdf5', language: 'fortran')
 mpi = dependency('mpi', language: 'fortran')
 
 compiler = meson.get_compiler('fortran')

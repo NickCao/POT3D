@@ -10,13 +10,23 @@
 # ### The CG solver has converged.
 # Iteration:    25112   Residual:   9.972489313728662E-13
 
+source "$PROJECT/spack/share/spack/setup-env.sh"
+
+spack load meson
+
 module load openmpi/4.0.5-nvhpc22.9
 module load hdf5/1.10.7-gcc10.2.0
 module load python/3.8.6
 
-"$PROJECT/nickcao/POT3D/scripts/validate" \
+WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
+SOURCEDIR="$PROJECT/nickcao/POT3D"
+
+meson setup --prefix "$WORKDIR/prefix" --buildtype release "$WORKDIR/builddir" "$SOURCEDIR"
+meson install -C "$WORKDIR/builddir"
+
+"$SOURCEDIR/scripts/validate" \
   --mpirun    "$(type -P mpirun)" \
-  --pot3d     "$PROJECT/nickcao/POT3D/builddir/pot3d" \
-  --workdir   "$PROJECT/nickcao/workdir/$SLURM_JOB_ID" \
-  --testsuite "$PROJECT/nickcao/POT3D/testsuite/validation" \
+  --pot3d     "$WORKDIR/prefix/bin/pot3d" \
+  --workdir   "$WORKDIR/work" \
+  --testsuite "$SOURCEDIR/testsuite/validation" \
   --mca btl '^openib'

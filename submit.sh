@@ -14,7 +14,6 @@
 set -euo pipefail
 
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
-export FFLAGS="-ftree-parallelize-loops=$OMP_NUM_THREADS"
 
 source "$PROJECT/spack/share/spack/setup-env.sh"
 
@@ -26,6 +25,7 @@ case "$TOOLCHAIN" in
   gnu)
     module load openmpi/4.0.5-gcc10.2.0
     module load hdf5/1.10.7-gcc10.2.0
+    export FFLAGS="-ftree-parallelize-loops=$OMP_NUM_THREADS"
     ;;
   intel)
     module load intel/20.4

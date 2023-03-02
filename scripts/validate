@@ -32,4 +32,9 @@ subprocess.run(
 )
 
 with open(args.workdir / "pot3d.out") as f:
-    print(f.read())
+    test = f.readlines()[-4:]
+
+with open(args.testsuite / "validation/pot3d.out") as f:
+    ref = f.readlines()[-4:]
+
+assert test == ref

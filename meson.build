@@ -21,18 +21,28 @@ validate = find_program(
     ['scripts/validate'],
 )
 
-test(
+testsuites = [
     'validation',
-    validate,
-    args: [
-        '--mpirun',
-        mpirun.full_path(),
-        '--pot3d',
-        pot3d.full_path(),
-        '--workdir',
-        join_paths(meson.current_build_dir(), 'validation'),
-        '--testsuite',
-        join_paths(meson.current_source_dir(), 'testsuite/validation'),
-    ],
-    timeout: 600,
-)
+    'small',
+    'medium',
+    'large',
+    'isc2023',
+]
+
+foreach testsuite : testsuites
+    test(
+        testsuite,
+        validate,
+        args: [
+            '--mpirun',
+            mpirun.full_path(),
+            '--pot3d',
+            pot3d.full_path(),
+            '--workdir',
+            meson.current_build_dir() / testsuite,
+            '--testsuite',
+            meson.current_source_dir() / 'testsuite' / testsuite,
+        ],
+        timeout: 600,
+    )
+endforeach

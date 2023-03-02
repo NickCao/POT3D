@@ -16,6 +16,7 @@ source "$PROJECT/spack/share/spack/setup-env.sh"
 
 spack load meson
 
+module load nvhpc/22.9
 module load openmpi/4.0.5-nvhpc22.9
 module load hdf5/1.10.7-gcc10.2.0
 module load python/3.8.6

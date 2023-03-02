@@ -10,23 +10,12 @@ parser.add_argument("--mpirun", type=Path)
 parser.add_argument("--pot3d", type=Path)
 parser.add_argument("--testsuite", type=Path)
 parser.add_argument("--workdir", type=Path)
-args = parser.parse_args()
+args, passthru = parser.parse_known_args()
 
 shutil.copytree(args.testsuite / "input", args.workdir, dirs_exist_ok=True)
+
 subprocess.run(
-    [
-        args.mpirun,
-        "--mca",
-        "btl",
-        "tcp,self",
-        "--mca",
-        "btl_tcp_if_include",
-        "lo",
-        "--oversubscribe",
-        "-np",
-        "2",
-        args.pot3d,
-    ],
+    [args.mpirun] + passthru + [args.pot3d],
     cwd=args.workdir,
     check=True,
 )

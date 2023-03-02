@@ -26,7 +26,7 @@ testsuites = [
 ]
 
 if get_option('large_tests')
-    testsuits += [
+    testsuites += [
         'small',
         'medium',
         'large',
@@ -47,6 +47,8 @@ foreach testsuite : testsuites
             meson.current_build_dir() / testsuite,
             '--testsuite',
             meson.current_source_dir() / 'testsuite' / testsuite,
+            '-np',
+            '2'
         ],
         timeout: 600,
     )

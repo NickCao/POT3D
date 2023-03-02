@@ -13,6 +13,12 @@ pot3d = executable(
     'src/pot3d.F',
     dependencies: [hdf5, mpi],
     link_language: 'fortran',
+    fortran_args: [
+        '-O3',
+        '-march=native',
+        '-ffast-math',
+        '-flto=auto',
+    ],
 )
 
 mpirun = find_program('mpirun')
@@ -48,7 +54,7 @@ foreach testsuite : testsuites
             '--testsuite',
             meson.current_source_dir() / 'testsuite' / testsuite,
             '-np',
-            '2'
+            '2',
         ],
         timeout: 600,
     )

@@ -20,8 +20,22 @@ source "$PROJECT/spack/share/spack/setup-env.sh"
 
 spack load python meson
 
-module load openmpi/4.0.5-gcc10.2.0
-module load hdf5/1.10.7-gcc10.2.0
+TOOLCHAIN="intel"
+
+case "$TOOLCHAIN" in
+  gnu)
+    module load openmpi/4.0.5-gcc10.2.0
+    module load hdf5/1.10.7-gcc10.2.0
+    ;;
+  intel)
+    module load intel/20.4
+    module load openmpi/4.0.2-intel20.4
+    module load hdf5/1.12.0-intel20.4
+    ;;
+  *)
+    exit 1
+    ;;
+esac
 
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
 SOURCEDIR="$PROJECT/nickcao/POT3D"

@@ -2,7 +2,8 @@
 #SBATCH --job-name=pot3d
 #SBATCH --partition=RM
 #SBATCH --nodes=4
-#SBATCH --ntasks-per-node=128
+#SBATCH --ntasks-per-node=16
+#SBATCH --cpus-per-task=8
 
 # Run POT3D with isc2023 input on both PSC bridges-2 and FAU Fritz CPU clusters using 4 nodes.
 # Experiment with number of ranks per socket/numa domains to get the best results.
@@ -11,6 +12,9 @@
 # Iteration:    25112   Residual:   9.972489313728662E-13
 
 set -euo pipefail
+
+export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
+export FFLAGS="-ftree-parallelize-loops=$OMP_NUM_THREADS"
 
 source "$PROJECT/spack/share/spack/setup-env.sh"
 

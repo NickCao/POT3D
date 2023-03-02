@@ -15,14 +15,27 @@ pot3d = executable(
     link_language: 'fortran',
 )
 
+mpirun = find_program('mpirun')
 fs = import('fs')
 
 test(
     'pot3d',
-    pot3d,
+    mpirun,
+    args: [
+        '--mca',
+        'btl',
+        'tcp,self',
+        '--mca',
+        'btl_tcp_if_include',
+        'lo',
+        '-np',
+        '2',
+        pot3d.full_path(),
+    ],
     depends: [
         fs.copyfile('testsuite/validation/input/pot3d.dat'),
         fs.copyfile('testsuite/validation/input/br_input_tiny.h5'),
     ],
     workdir: meson.current_build_dir(),
+    timeout: 600,
 )

@@ -51,7 +51,7 @@ meson compile -C "$WORKDIR/builddir"
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$WORKDIR/builddir/pot3d" \
   --workdir   "$WORKDIR/generate" \
-  --testsuite "$SOURCEDIR/testsuite/validation" \
+  --testsuite "$SOURCEDIR/testsuite/isc2023" \
   --mca btl '^openib'
 
 meson configure -Db_pgo=use \

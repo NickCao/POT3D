@@ -16,16 +16,8 @@ source "$PROJECT/spack/share/spack/setup-env.sh"
 
 spack load python meson
 
-toolchain = "gnu"
-if [ "$toolchain" == "nvhpc" ]; then
-  module use "$PROJECT/nickcao/nvhpc/modulefiles"
-  module load nvhpc/23.1
-  # spack install hdf5%nvhpc+fortran+hl~mpi
-  module load hdf5-1.14.0-nvhpc-23.1-3wmji6d
-else
-  module load openmpi/4.0.5-gcc10.2.0
-  module load hdf5/1.10.7-gcc10.2.0
-fi
+module load openmpi/4.0.5-gcc10.2.0
+module load hdf5/1.10.7-gcc10.2.0
 
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
 SOURCEDIR="$PROJECT/nickcao/POT3D"

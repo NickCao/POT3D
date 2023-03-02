@@ -14,11 +14,11 @@ set -euo pipefail
 
 source "$PROJECT/spack/share/spack/setup-env.sh"
 
-spack load meson
-
-module load nvhpc/22.9
-module load openmpi/4.0.5-nvhpc22.9
-module load hdf5/1.10.7-gcc10.2.0
+module use "$PROJECT/nickcao/nvhpc/modulefiles"
+module load meson-1.0.0-gcc-8.3.1-u3sn4aw
+module load nvhpc-hpcx/23.1
+# spack install hdf5%nvhpc+fortran+hl~mpi
+module load hdf5-1.14.0-nvhpc-23.1-3wmji6d
 module load python/3.8.6
 
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"

@@ -3,6 +3,22 @@ project('POT3D', ['fortran', 'c'])
 hdf5 = dependency('hdf5', language: 'fortran', method: 'config-tool')
 mpi = dependency('mpi', language: 'fortran')
 
+compiler = meson.get_compiler('fortran')
+
+flags_candidate = [
+    '-fast'
+    '-march=native',
+    '-ffast-math',
+    '-flto=auto',
+]
+
+flags = []
+foreach flag : flags_candidate
+    if compiler.has_argument(flag)
+        flags += flag
+    endif
+endforeach
+
 pot3d = executable(
     'pot3d',
     'src/number_types.f',
@@ -13,11 +29,7 @@ pot3d = executable(
     'src/pot3d.F',
     dependencies: [hdf5, mpi],
     link_language: 'fortran',
-    fortran_args: [
-        '-march=native',
-        '-ffast-math',
-        '-flto=auto',
-    ],
+    fortran_args: flags,
     install: true,
 )
 

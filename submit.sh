@@ -42,15 +42,25 @@ SOURCEDIR="$PROJECT/nickcao/POT3D"
 
 git -C "$SOURCEDIR" rev-parse HEAD
 
-meson setup --prefix "$WORKDIR/prefix" --buildtype release \
-  -Db_lto=true -Db_ndebug=if-release \
+meson setup --buildtype release \
+  -Db_lto=true -Db_ndebug=if-release -Db_pgo=generate \
   "$WORKDIR/builddir" "$SOURCEDIR"
-
-meson install -C "$WORKDIR/builddir"
+meson compile -C "$WORKDIR/builddir"
 
 "$SOURCEDIR/scripts/validate" \
   --mpirun    "$(type -P mpirun)" \
-  --pot3d     "$WORKDIR/prefix/bin/pot3d" \
-  --workdir   "$WORKDIR/work" \
+  --pot3d     "$WORKDIR/builddir/pot3d" \
+  --workdir   "$WORKDIR/generate" \
+  --testsuite "$SOURCEDIR/testsuite/validation" \
+  --mca btl '^openib'
+
+meson configure -Db_pgo=use \
+  "$WORKDIR/builddir"
+meson compile -C "$WORKDIR/builddir"
+
+"$SOURCEDIR/scripts/validate" \
+  --mpirun    "$(type -P mpirun)" \
+  --pot3d     "$WORKDIR/builddir/pot3d" \
+  --workdir   "$WORKDIR/use" \
   --testsuite "$SOURCEDIR/testsuite/isc2023" \
   --mca btl '^openib'

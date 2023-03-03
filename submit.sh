@@ -34,26 +34,27 @@ git -C "$SOURCEDIR" rev-parse HEAD
 
 # setup env vars
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
+export JOBDIR="$WORKDIR/$SLURM_JOB_ID"
 
 # first pass
 meson setup --buildtype release \
   -Db_lto=true -Db_ndebug=if-release -Db_pgo=generate \
-  "$WORKDIR/builddir" "$SOURCEDIR"
-meson compile -C "$WORKDIR/builddir"
+  "$JOBDIR/builddir" "$SOURCEDIR"
+meson compile -C "$JOBDIR/builddir"
 
 "$SOURCEDIR/scripts/validate" \
   --mpirun    "$(type -P mpirun)" \
-  --pot3d     "$WORKDIR/builddir/pot3d" \
-  --workdir   "$WORKDIR/gen" \
+  --pot3d     "$JOBDIR/builddir/pot3d" \
+  --workdir   "$JOBDIR/gen" \
   --testsuite "$SOURCEDIR/testsuite/$TESTSUITE"
 
 # second pass
 meson configure -Db_pgo=use \
-  "$WORKDIR/builddir"
-meson compile -C "$WORKDIR/builddir"
+  "$JOBDIR/builddir"
+meson compile -C "$JOBDIR/builddir"
 
 "$SOURCEDIR/scripts/validate" \
   --mpirun    "$(type -P mpirun)" \
-  --pot3d     "$WORKDIR/builddir/pot3d" \
-  --workdir   "$WORKDIR/use" \
+  --pot3d     "$JOBDIR/builddir/pot3d" \
+  --workdir   "$JOBDIR/use" \
   --testsuite "$SOURCEDIR/testsuite/$TESTSUITE"

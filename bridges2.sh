@@ -2,12 +2,13 @@
 
 set -euo pipefail
 
-# cluster specific environment
 TOOLCHAIN="bridges2"
+TESTSUITE="small"
+
+# cluster specific environment
 SPACKDIR="$PROJECT/spack"
 SOURCEDIR="$PROJECT/nickcao/POT3D"
-WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
-TESTSUITE="small"
+WORKDIR="$PROJECT/nickcao/workdir"
 
 sbatch \
   --job-name=pot3d \
@@ -16,10 +17,10 @@ sbatch \
   --ntasks-per-node=16 \
   --cpus-per-task=8 \
   --time=02:30:00 \
-  --chdir="$PROJECT/nickcao/workdir" \
+  --chdir="$WORKDIR" \
   --export="TOOLCHAIN=$TOOLCHAIN" \
+  --export="TESTSUITE=$TESTSUITE" \
   --export="SPACKDIR=$SPACKDIR" \
   --export="SOURCEDIR=$SOURCEDIR" \
-  --export="WORKDIR=$WORKDIR"
-  --export="TESTSUITE=$TESTSUITE" \
+  --export="WORKDIR=$WORKDIR" \
   submit.sh

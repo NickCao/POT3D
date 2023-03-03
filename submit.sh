@@ -38,7 +38,7 @@ case "$TOOLCHAIN" in
     spack load intel-oneapi-compilers
     spack load intel-oneapi-mpi
     spack load hdf5%intel
-    export CC=icc FC=mpifort
+    export CC=icc FC=ifort
     MPIARG=()
     ;;
   fau)

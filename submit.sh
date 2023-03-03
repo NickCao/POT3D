@@ -42,9 +42,11 @@ case "$TOOLCHAIN" in
     MPIARG=()
     ;;
   fau)
-    module load openmpi/4.1.4-gcc12.2.0
-    module load hdf5/1.12.2-gcc12.2.0-ompi
-    MPIARG=("--mca" "btl" '^openib')
+    source /usr/share/Modules/init/bash
+    module load git
+    module load intelmpi/2021.7.1
+    module load hdf5/1.12.2-intel2021.7.0-impi
+    MPIARG=()
     ;;
   *)
     exit 1

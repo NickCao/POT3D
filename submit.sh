@@ -26,16 +26,10 @@ source "$SPACKDIR/share/spack/setup-env.sh"
 
 spack load python meson
 
-TOOLCHAIN="intel"
+TOOLCHAIN="bridges2"
 
 case "$TOOLCHAIN" in
-  gnu)
-    module load openmpi/4.0.5-gcc10.2.0
-    module load hdf5/1.10.7-gcc10.2.0
-    export FFLAGS="-ftree-parallelize-loops=$OMP_NUM_THREADS"
-    MPIARG=("--mca" "btl" '^openib')
-    ;;
-  intel)
+  bridges2)
     module load openmpi/4.0.2-intel20.4
     module load hdf5/1.12.0-intel20.4
     MPIARG=()

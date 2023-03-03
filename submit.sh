@@ -30,8 +30,8 @@ TOOLCHAIN="bridges2"
 
 case "$TOOLCHAIN" in
   bridges2)
-    module load hdf5/1.12.0-intel20.4
     module load openmpi/4.0.2-intel20.4
+    module load hdf5/1.12.0-intel20.4
     MPIARG=()
     ;;
   fau)

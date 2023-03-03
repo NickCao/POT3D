@@ -8,12 +8,12 @@ SBATCH_FLAGS=(
   '--job-name=pot3d'
   '--nodes=4'
   '--time=02:30:00'
-  '--export=TOOLCHAIN,TESTSUITE,SPACKDIR,SOURCEDIR,WORKDIR'
+  '--export=CLUSTER,TESTSUITE,SPACKDIR,SOURCEDIR,WORKDIR'
 )
 
 case $(whoami) in
   jcao3)
-    export TOOLCHAIN="bridges2"
+    export CLUSTER="bridges2"
 
     export SPACKDIR="$PROJECT/spack"
     export SOURCEDIR="$PROJECT/nickcao/POT3D"
@@ -27,7 +27,7 @@ case $(whoami) in
     )
     ;;
   b154dc26)
-    export TOOLCHAIN="fau"
+    export CLUSTER="fau"
 
     export SPACKDIR="$HOME/spack"
     export SOURCEDIR="$HOME/nickcao/POT3D"

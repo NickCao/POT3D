@@ -6,7 +6,7 @@ set -euo pipefail
 source "$SPACKDIR/share/spack/setup-env.sh"
 spack load python meson
 
-case "$TOOLCHAIN" in
+case "$CLUSTER" in
   bridges2)
     # spack install intel-oneapi-compilers
     # spack compiler add `spack location -i intel-oneapi-compilers`/compiler/latest/linux/bin/intel64

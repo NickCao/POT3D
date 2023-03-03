@@ -36,7 +36,7 @@ case "$TOOLCHAIN" in
     # spack install hdf5%intel+fortran+hl~mpi
     # patch mesonbuild/dependencies/mpi.py to allow using openmpi with ifort
     spack load intel-oneapi-compilers
-    spack load openmpi%intel
+    spack load intel-oneapi-mpi
     spack load hdf5%intel
     export CC=icc FC=mpifort
     MPIARG=()

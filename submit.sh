@@ -45,6 +45,7 @@ case "$TOOLCHAIN" in
     module load openmpi/4.1.4-gcc12.2.0
     module load hdf5/1.12.2-gcc12.2.0-ompi
     MPIARG=("--mca" "btl" '^openib')
+    ;;
   *)
     exit 1
     ;;

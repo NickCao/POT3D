@@ -18,7 +18,7 @@ set -euo pipefail
 SPACKDIR="$PROJECT/spack"
 SOURCEDIR="$PROJECT/nickcao/POT3D"
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
-TESTSUITE=isc2023
+TESTSUITE="small"
 
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 

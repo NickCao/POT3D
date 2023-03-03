@@ -38,10 +38,9 @@ case "$TOOLCHAIN" in
   intel)
     module load openmpi/4.0.2-intel20.4
     module load hdf5/1.12.0-intel20.4
-    MPIARG=("--mca" "btl" '^openib')
+    MPIARG=()
     ;;
   fau)
-    module load gcc/12.2.0
     module load openmpi/4.1.4-gcc12.2.0
     module load hdf5/1.12.2-gcc12.2.0-ompi
     MPIARG=("--mca" "btl" '^openib')

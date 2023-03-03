@@ -14,9 +14,14 @@
 
 set -euo pipefail
 
+# cluster specific environment
+SPACKDIR="$PROJECT/spack"
+SOURCEDIR="$PROJECT/nickcao/POT3D"
+WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
+
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 
-source "$PROJECT/spack/share/spack/setup-env.sh"
+source "$SPACKDIR/share/spack/setup-env.sh"
 
 spack load python meson
 
@@ -44,9 +49,6 @@ case "$TOOLCHAIN" in
     exit 1
     ;;
 esac
-
-WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
-SOURCEDIR="$PROJECT/nickcao/POT3D"
 
 git -C "$SOURCEDIR" rev-parse HEAD
 

@@ -30,9 +30,13 @@ TOOLCHAIN="bridges2"
 
 case "$TOOLCHAIN" in
   bridges2)
-    module load intel/2021.3.0
-    module load intelmpi/2021.3.0-intel2021.3.0
-    module load hdf5-1.14.0-nvhpc-23.1-3wmji6d # hdf5%intel+fortran+hl~mpi
+    # spack install intel-oneapi-compilers
+    # spack compiler add `spack location -i intel-oneapi-compilers`/compiler/latest/linux/bin/intel64
+    # spack install openmpi%intel+legacylaunchers fabrics=ucx schedulers=slurm
+    # spack install hdf5%intel+fortran+hl~mpi
+    spack load intel-oneapi-compilers
+    spack load openmpi%intel
+    spack load hdf5%intel
     MPIARG=()
     ;;
   fau)

@@ -34,9 +34,11 @@ case "$TOOLCHAIN" in
     # spack compiler add `spack location -i intel-oneapi-compilers`/compiler/latest/linux/bin/intel64
     # spack install openmpi%intel+legacylaunchers fabrics=ucx schedulers=slurm
     # spack install hdf5%intel+fortran+hl~mpi
+    # patch mesonbuild/dependencies/mpi.py
     spack load intel-oneapi-compilers
     spack load openmpi%intel
     spack load hdf5%intel
+    export CC=icc FC=mpifort
     MPIARG=()
     ;;
   fau)

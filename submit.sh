@@ -31,6 +31,10 @@ case "$CLUSTER-$TOOLCHAIN-$COMM" in
     source /usr/share/Modules/init/bash
     module load git
     module load hdf5/1.12.2-gcc12.2.0-ompi
+  fau-gnu-intelmpi)
+    source /usr/share/Modules/init/bash
+    module load git
+    module load hdf5/1.12.2-gcc12.2.0-impi
   *)
     exit 1
     ;;

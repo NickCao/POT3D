@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export TESTSUITE="small"
+
+SBATCH_FLAGS=(
+  '--job-name=pot3d'
+  '--nodes=4'
+  '--time=02:30:00'
+  '--export=TOOLCHAIN,TESTSUITE,SPACKDIR,SOURCEDIR,WORKDIR'
+)
+
+case $(whoami) in
+  jcao3)
+    export TOOLCHAIN="bridges2"
+
+    export SPACKDIR="$PROJECT/spack"
+    export SOURCEDIR="$PROJECT/nickcao/POT3D"
+    export WORKDIR="$PROJECT/nickcao/workdir"
+
+    SBATCH_FLAGS+=(
+      "--chdir=$WORKDIR"
+      '--partition=RM'
+      '--ntasks-per-node=16'
+      '--cpus-per-task=8'
+    )
+    ;;
+  b154dc26)
+    export TOOLCHAIN="fau"
+
+    export SPACKDIR="$HOME/spack"
+    export SOURCEDIR="$HOME/nickcao/POT3D"
+    export WORKDIR="$HOME/nickcao/workdir"
+
+    SBATCH_FLAGS+=(
+      "--chdir=$WORKDIR"
+      '--ntasks-per-node=72'
+      '--cpus-per-task=1'
+    )
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+
+sbatch "${SBATCH_FLAGS[@]}" submit.sh

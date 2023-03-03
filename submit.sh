@@ -1,10 +1,15 @@
-#!/usr/bin/bash -l
+#!/usr/bin/env bash
 
 set -euo pipefail
 
 # load spack
 source "$SPACKDIR/share/spack/setup-env.sh"
 spack load python meson
+
+if [ "$CLUSTER" == "fau" ]; then
+  source /usr/share/Modules/init/bash
+  module load git
+fi
 
 case "$CLUSTER-$TOOLCHAIN-$COMM" in
   bridges2-intel-intelmpi)
@@ -20,18 +25,17 @@ case "$CLUSTER-$TOOLCHAIN-$COMM" in
     ;;
   fau-intel-openmpi)
     # broken
-    module load git hdf5/1.12.2-intel2021.7.0-ompi
+    module load hdf5/1.12.2-intel2021.7.0-ompi
     ;;
   fau-intel-intelmpi)
-    module load git hdf5/1.12.2-intel2021.7.0-impi
+    module load hdf5/1.12.2-intel2021.7.0-impi
     ;;
   fau-gnu-openmpi)
-    # broken
-    module load git hdf5/1.12.2-gcc12.2.0-ompi
+    module load hdf5/1.12.2-gcc12.2.0-ompi
     ;;
   fau-gnu-intelmpi)
     # broken
-    module load git hdf5/1.12.2-gcc12.2.0-impi
+    module load hdf5/1.12.2-gcc12.2.0-impi
     ;;
   *)
     exit 1

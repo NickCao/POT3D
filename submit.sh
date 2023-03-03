@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -l
+#!/usr/bin/bash -l
 
 set -euo pipefail
 
@@ -19,15 +19,18 @@ case "$CLUSTER-$TOOLCHAIN-$COMM" in
     export CC=icc FC=ifort
     ;;
   fau-intel-openmpi)
+    # broken
     module load git hdf5/1.12.2-intel2021.7.0-ompi
     ;;
   fau-intel-intelmpi)
     module load git hdf5/1.12.2-intel2021.7.0-impi
     ;;
   fau-gnu-openmpi)
+    # broken
     module load git hdf5/1.12.2-gcc12.2.0-ompi
     ;;
   fau-gnu-intelmpi)
+    # broken
     module load git hdf5/1.12.2-gcc12.2.0-impi
     ;;
   *)

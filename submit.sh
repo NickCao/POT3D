@@ -18,6 +18,7 @@ set -euo pipefail
 SPACKDIR="$PROJECT/spack"
 SOURCEDIR="$PROJECT/nickcao/POT3D"
 WORKDIR="$PROJECT/nickcao/workdir/$SLURM_JOB_ID"
+TESTSUITE=isc2023
 
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 
@@ -50,8 +51,14 @@ case "$TOOLCHAIN" in
     ;;
 esac
 
+# show source info
 git -C "$SOURCEDIR" rev-parse HEAD
 
+# load spack
+source "$SPACKDIR/share/spack/setup-env.sh"
+spack load python meson
+
+# first pass
 meson setup --buildtype release \
   -Db_lto=true -Db_ndebug=if-release -Db_pgo=generate \
   "$WORKDIR/builddir" "$SOURCEDIR"
@@ -61,9 +68,10 @@ meson compile -C "$WORKDIR/builddir"
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$WORKDIR/builddir/pot3d" \
   --workdir   "$WORKDIR/generate" \
-  --testsuite "$SOURCEDIR/testsuite/isc2023" \
+  --testsuite "$SOURCEDIR/testsuite/$TESTSUITE" \
   "${MPIARG[@]}"
 
+# second pass
 meson configure -Db_pgo=use \
   "$WORKDIR/builddir"
 meson compile -C "$WORKDIR/builddir"
@@ -72,5 +80,5 @@ meson compile -C "$WORKDIR/builddir"
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$WORKDIR/builddir/pot3d" \
   --workdir   "$WORKDIR/use" \
-  --testsuite "$SOURCEDIR/testsuite/isc2023" \
+  --testsuite "$SOURCEDIR/testsuite/$TESTSUITE" \
   "${MPIARG[@]}"

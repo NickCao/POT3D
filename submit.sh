@@ -6,8 +6,8 @@ set -euo pipefail
 source "$SPACKDIR/share/spack/setup-env.sh"
 spack load python meson
 
-case "$CLUSTER" in
-  bridges2)
+case "$CLUSTER-$TOOLCHAIN-$COMM" in
+  bridges2-intel-intelmpi)
     # spack install intel-oneapi-compilers
     # spack compiler add `spack location -i intel-oneapi-compilers`/compiler/latest/linux/bin/intel64
     # spack install openmpi%intel+legacylaunchers fabrics=ucx schedulers=slurm
@@ -18,7 +18,7 @@ case "$CLUSTER" in
     spack load hdf5%intel
     export CC=icc FC=ifort
     ;;
-  fau)
+  fau-intel-intelmpi)
     source /usr/share/Modules/init/bash
     module load git
     module load intelmpi/2021.7.1

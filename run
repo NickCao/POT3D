@@ -3,12 +3,14 @@
 set -exuo pipefail
 
 export TESTSUITE="small"
+export TOOLCHAIN="intel"
+export COMM="intelmpi"
 
 SBATCH_FLAGS=(
   '--job-name=pot3d'
   '--nodes=4'
   '--time=02:30:00'
-  '--export=CLUSTER,TESTSUITE,SPACKDIR,SOURCEDIR,WORKDIR'
+  '--export=CLUSTER,TOOLCHAIN,COMM,TESTSUITE,SPACKDIR,SOURCEDIR,WORKDIR'
 )
 
 case $(whoami) in

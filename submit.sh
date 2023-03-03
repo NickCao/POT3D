@@ -34,7 +34,7 @@ case "$TOOLCHAIN" in
     # spack compiler add `spack location -i intel-oneapi-compilers`/compiler/latest/linux/bin/intel64
     # spack install openmpi%intel+legacylaunchers fabrics=ucx schedulers=slurm
     # spack install hdf5%intel+fortran+hl~mpi
-    # patch mesonbuild/dependencies/mpi.py to allow using openmpi with ifort
+    # patch with https://github.com/mesonbuild/meson/pull/10056
     spack load intel-oneapi-compilers
     spack load intel-oneapi-mpi
     spack load hdf5%intel

@@ -10,6 +10,7 @@ SBATCH_FLAGS=(
   '--job-name=pot3d'
   '--nodes=4'
   '--time=02:30:00'
+  '--export=ALL'
 )
 
 case $(whoami) in

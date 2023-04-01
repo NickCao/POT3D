@@ -4,7 +4,7 @@ set -euo pipefail
 
 # load spack
 source "$SPACKDIR/share/spack/setup-env.sh"
-spack load python meson
+spack load python%gcc@12 meson%gcc@12
 
 if [ "$CLUSTER" == "fau" ]; then
   source /usr/share/Modules/init/bash

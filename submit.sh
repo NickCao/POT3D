@@ -23,19 +23,8 @@ case "$CLUSTER-$TOOLCHAIN-$COMM" in
     spack load hdf5%intel
     export CC=icc FC=ifort
     ;;
-  fau-intel-openmpi)
-    # broken
-    module load hdf5/1.12.2-intel2021.7.0-ompi
-    ;;
-  fau-intel-intelmpi)
-    module load hdf5/1.12.2-intel2021.7.0-impi
-    ;;
   fau-gnu-openmpi)
     module load hdf5/1.12.2-gcc12.2.0-ompi
-    ;;
-  fau-gnu-intelmpi)
-    # broken
-    module load hdf5/1.12.2-gcc12.2.0-impi
     ;;
   *)
     exit 1

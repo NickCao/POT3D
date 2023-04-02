@@ -40,7 +40,7 @@ export JOBDIR="$WORKDIR/$SLURM_JOB_ID"
 
 # first pass
 meson setup --buildtype release \
-  -Db_lto=true -Db_ndebug=if-release -Db_pgo=generate \
+  -Db_lto=true -Db_ndebug=if-release \
   "$JOBDIR/builddir" "$SOURCEDIR"
 meson compile -C "$JOBDIR/builddir"
 
@@ -48,15 +48,4 @@ meson compile -C "$JOBDIR/builddir"
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$JOBDIR/builddir/pot3d" \
   --workdir   "$JOBDIR/gen" \
-  --testsuite "$SOURCEDIR/testsuite/$TESTSUITE"
-
-# second pass
-meson configure -Db_pgo=use \
-  "$JOBDIR/builddir"
-meson compile -C "$JOBDIR/builddir"
-
-"$SOURCEDIR/scripts/validate" \
-  --mpirun    "$(type -P mpirun)" \
-  --pot3d     "$JOBDIR/builddir/pot3d" \
-  --workdir   "$JOBDIR/use" \
   --testsuite "$SOURCEDIR/testsuite/$TESTSUITE"

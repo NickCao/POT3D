@@ -47,5 +47,5 @@ meson compile -C "$JOBDIR/builddir"
 "$SOURCEDIR/scripts/validate" \
   --mpirun    "$(type -P mpirun)" \
   --pot3d     "$JOBDIR/builddir/pot3d" \
-  --workdir   "$JOBDIR/gen" \
+  --workdir   "$JOBDIR/work" \
   --testsuite "$SOURCEDIR/testsuite/$TESTSUITE"

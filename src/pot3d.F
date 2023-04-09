@@ -5439,6 +5439,8 @@ c
 c ****** MPI error return.
 c
       integer :: ierr
+      integer :: req0
+      integer :: req1
 c
 c-----------------------------------------------------------------------
 c
@@ -5446,13 +5448,21 @@ c
 c
 !$acc host_data use_device(a0,a1)
       if (tb0) then
-        call MPI_Allreduce (MPI_IN_PLACE,a0,n,ntype_real,
-     &                        MPI_SUM,comm_phi,ierr)
+        call MPI_Iallreduce (MPI_IN_PLACE,a0,n,ntype_real,
+     &                        MPI_SUM,comm_phi,req0,ierr)
       end if
 c
       if (tb1) then
-        call MPI_Allreduce (MPI_IN_PLACE,a1,n,ntype_real,
-     &                        MPI_SUM,comm_phi,ierr)
+        call MPI_Iallreduce (MPI_IN_PLACE,a1,n,ntype_real,
+     &                        MPI_SUM,comm_phi,req1,ierr)
+      end if
+
+      if (tb0) then
+        call MPI_Wait (req0,MPI_STATUS_IGNORE,ierr)
+      end if
+
+      if (tb1) then
+        call MPI_Wait (req1,MPI_STATUS_IGNORE,ierr)
       end if
 !$acc end host_data
 c

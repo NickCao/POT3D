@@ -24,6 +24,7 @@ case "$CLUSTER-$TOOLCHAIN-$COMM" in
     export CC=icc FC=ifort
     ;;
   fau-gnu-openmpi)
+    module load gcc/12.2.0
     spack load openmpi/3xk5fdp hdf5/o6kmihv
     ;;
   *)

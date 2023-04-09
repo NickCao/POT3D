@@ -21,7 +21,7 @@ case "$CLUSTER-$TOOLCHAIN-$COMM" in
     spack load intel-oneapi-compilers
     spack load intel-oneapi-mpi
     spack load hdf5%intel
-    export CC=icc FC=ifort
+    export CC=icc FC=ifort IFORTCFG=/dev/null
     ;;
   fau-gnu-openmpi)
     module load gcc/12.2.0

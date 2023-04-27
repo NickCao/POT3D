@@ -2,14 +2,14 @@
 
 set -exuo pipefail
 
-export TESTSUITE="small"
+export TESTSUITE="isc2023"
 export TOOLCHAIN="intel"
 export COMM="intelmpi"
 
 SBATCH_FLAGS=(
   '--job-name=pot3d'
   '--nodes=4'
-  '--time=02:30:00'
+  '--time=02:00:00'
   '--export=ALL'
 )
 

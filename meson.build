@@ -12,11 +12,19 @@ flags = compiler.get_supported_arguments(
     # ifort only
     '-fast',
     '-parallel',
+    '-stdpar=gpu',
+    '-acc=gpu',
+    '-gpu=nomanaged',
+    '-Minfo=accel',
 )
 
 link_flags = compiler.get_supported_link_arguments(
     # ifort only
     '-parallel',
+    '-stdpar=gpu',
+    '-acc=gpu',
+    '-gpu=nomanaged',
+    '-Minfo=accel',
 )
 
 pot3d = executable(
